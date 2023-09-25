@@ -16,8 +16,8 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: UiPathTeam.Extensions.sln
-      Project_Design_Path: UiPathTeam.Extensions.Activities.Design\UiPathTeam.Extensions.Activities.Design.csproj
+      Solution_Name: test.sln
+      Project_Design_Path: test\test.csproj
 #      Test_Project_Path: UiPathTeam.Extensions.Tests\UiPathTeam.Extensions.Tests.csproj
 
 
@@ -49,14 +49,11 @@ jobs:
     - name: Create Build Directory
       run: mkdir _build
 
-    - name: dir print
-      run: dir
-      
     - name: Restore dependencies
-      run: dotnet restore UiPathTeam.Extensions.sln
+      run: dotnet restore
 
     - name: Build Solution
-      run: msbuild.exe UiPathTeam.Extensions.sln /verbosity:minimal /p:GeneratePackageOnBuild=false
+      run: msbuild.exe $env:Solution_Name /verbosity:minimal /p:GeneratePackageOnBuild=false
 
     - name: Create the nuget package
       run: dotnet pack $env:Project_Design_Path --configuration Debug --output "_build" --no-build
