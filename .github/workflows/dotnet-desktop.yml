@@ -66,8 +66,20 @@ jobs:
 #    - name: Execute unit tests
 #      run: dotnet test
 
-    - name: Upload nuget package
-      uses: actions/upload-artifact@v3
+#    - name: Upload nuget package
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: nuget Package
+#        path: "./_build"
+
+#https://trstringer.com/github-actions-create-release-upload-artifacts/#:~:text=For%20the%20upload%20to%20target,it%20named%20in%20the%20release.
+#https://github.com/actions/upload-release-asset
+    - name: upload nuget artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
       with:
-        name: nuget Package
-        path: "./_build"
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./_build/test.zip
+        asset_name: test.zip
+        asset_content_type: application/zip
