@@ -56,7 +56,7 @@ jobs:
       run: msbuild.exe $env:Solution_Name /verbosity:minimal /p:GeneratePackageOnBuild=false
 
     - name: Create the nuget package
-      run: dotnet pack $env:Project_Design_Path --configuration Debug --output "_build" --no-build
+      run: dotnet pack --configuration Debug --output "_build" --no-build
 
 #    - name: Execute unit tests
 #      run: dotnet test
