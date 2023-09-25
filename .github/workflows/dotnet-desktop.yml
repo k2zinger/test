@@ -24,8 +24,7 @@ jobs:
     steps:
     # https://stackoverflow.com/questions/60942067/get-current-date-and-time-in-github-workflows
     - name: Get current year
-      run: echo "year=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-#      run: echo "year=$(date +'%Y')" >> $GITHUB_ENV
+      run: echo "year=$(date +'%Y')" >> $GITHUB_ENV
 
     - name: Application Version
       id: version
@@ -51,7 +50,7 @@ jobs:
       run: mkdir _build
       
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore $env:Solution_Name
 
     - name: Build Solution
       run: msbuild.exe $env:Solution_Name /verbosity:minimal /p:GeneratePackageOnBuild=false
