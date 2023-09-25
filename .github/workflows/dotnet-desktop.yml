@@ -50,10 +50,10 @@ jobs:
       run: mkdir _build
       
     - name: Restore dependencies
-      run: dotnet restore $env:Solution_Name
+      run: dotnet restore UiPathTeam.Extensions.sln
 
     - name: Build Solution
-      run: msbuild.exe $env:Solution_Name /verbosity:minimal /p:GeneratePackageOnBuild=false
+      run: msbuild.exe UiPathTeam.Extensions.sln /verbosity:minimal /p:GeneratePackageOnBuild=false
 
     - name: Create the nuget package
       run: dotnet pack $env:Project_Design_Path --configuration Debug --output "_build" --no-build
