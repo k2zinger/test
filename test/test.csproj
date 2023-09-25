@@ -15,11 +15,11 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-	<Copyright>© $(year) UiPath</Copyright>
-	<Version>$(version)</Version>
+	<Copyright>© $([System.DateTime]::Now.ToString("yyyy")) UiPath</Copyright>
+	<Version>$(vers)</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PackageVersion>$(version).$([System.DateTime]::UtcNow.ToString(MMddHHmmss))</PackageVersion>
+    <!--<PackageVersion>$(vers).$([System.DateTime]::UtcNow.ToString(MMddHHmmss))</PackageVersion>-->
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -29,7 +29,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PackageVersion>$(version)</PackageVersion>
+    <!--<PackageVersion>$(vers)</PackageVersion>-->
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -57,5 +57,4 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
  </Project>
