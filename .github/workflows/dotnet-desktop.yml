@@ -48,6 +48,9 @@ jobs:
 
     - name: Create Build Directory
       run: mkdir _build
+
+    - name: dir print
+      run: dir
       
     - name: Restore dependencies
       run: dotnet restore UiPathTeam.Extensions.sln
