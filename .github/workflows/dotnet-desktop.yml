@@ -27,13 +27,13 @@ jobs:
       run: echo "year=$(date +'%Y')" >> $GITHUB_ENV
 
     - name: Application Version
-      id: version
+      id: vers
       uses: paulhatch/semantic-version@v5.2.1
       env:
-        version: ${{steps.version}}
+        vers: ${{steps.vers}}
 
     - name: print version
-      run: echo $version
+      run: echo $vers
 
     - name: Checkout code
       uses: actions/checkout@v3
