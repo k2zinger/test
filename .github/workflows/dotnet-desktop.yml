@@ -24,10 +24,7 @@ jobs:
     steps:
     # https://stackoverflow.com/questions/60942067/get-current-date-and-time-in-github-workflows
     - name: Get current year
-      id: year
-      run: echo "::set-output name=year::$(date +'%Y')"
-      env:
-        year: ${{steps.year.outputs.year}}
+      run: echo "year=$(date + '%Y')" >> $GITHUB_ENV
 
     - name: Application Version
       id: version
