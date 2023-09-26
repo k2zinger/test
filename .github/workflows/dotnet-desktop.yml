@@ -19,7 +19,6 @@ jobs:
 
 
     steps:
-    # https://stackoverflow.com/questions/60942067/get-current-date-and-time-in-github-workflows
     - name: Get current year
       run: echo "year=$(date +'%Y')" >> $GITHUB_ENV
 
