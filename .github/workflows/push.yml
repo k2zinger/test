@@ -24,9 +24,6 @@ jobs:
       id: version
       uses: paulhatch/semantic-version@v5.2.1
 
-    - name: print version
-      run: echo ${{steps.version.outputs.version}}
-
     - name: print version tag
       run: echo ${{steps.version.outputs.version_tag}}
 
@@ -36,7 +33,7 @@ jobs:
       with:
         draft: false
         prerelease: false
-        release_name: ${{ steps.version.outputs.version }}
+        release_name: ${{ steps.version.outputs.version_tag }}
         tag_name: ${{ github.ref }}
         body: ${{ github.event.head_commit.message }}
       env:
@@ -67,7 +64,7 @@ jobs:
     - name: Build Solution
       run: msbuild.exe $env:Solution_Name /verbosity:minimal /p:GeneratePackageOnBuild=false /p:Configuration=Release
       env:
-        version: ${{ steps.version.outputs.version }}
+        version: ${{ steps.version.outputs.version_tag }}
 
     - name: Create the nuget package
       run: dotnet pack --configuration Debug --output "_build" --no-build
