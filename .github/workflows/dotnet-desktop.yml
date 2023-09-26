@@ -27,8 +27,8 @@ jobs:
     - name: Test1
       id: t1
       uses: Kaven-Universe/github-action-current-date-time@v1
-	  env:
-	    vers: ${{ steps.t1.outputs.milliseconds_since_epoch }}
+      env:
+        vers: ${{ steps.t1.outputs.milliseconds_since_epoch }}
 
     - name: Checkout code
       uses: actions/checkout@v3
