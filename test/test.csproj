@@ -14,9 +14,9 @@
     <AssemblyName>test</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-	<Copyright>© $([System.DateTime]::Now.ToString("yyyy")) UiPath</Copyright>
-	<Version>$(vers)</Version>
-	<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <Copyright>© $([System.DateTime]::Now.ToString("yyyy")) UiPath</Copyright>
+    <Version Condition="'$(version)' == ''">1.0.0</Version>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
@@ -25,10 +25,10 @@
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	<UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <!--<PackageVersion>$(vers).$([System.DateTime]::UtcNow.ToString(MMddHHmmss))</PackageVersion>-->
+    <!--<PackageVersion>$(version).$([System.DateTime]::UtcNow.ToString(MMddHHmmss))</PackageVersion>-->
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -38,7 +38,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <!--<PackageVersion>$(vers)</PackageVersion>-->
+    <PackageVersion>$(version)</PackageVersion>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -51,7 +51,7 @@
     <Reference Include="System.Activities" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-	<Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
