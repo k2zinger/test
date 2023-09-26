@@ -28,7 +28,7 @@ jobs:
       run: echo ${{steps.version.outputs.version_tag}}
 
     - name: create release
-      uses: actions/create-release@v1
+      uses: actions/create-release@v1.1.4
       id: create_release
       with:
         draft: false
@@ -67,7 +67,7 @@ jobs:
         version: ${{ steps.version.outputs.version_tag }}
 
     - name: Create the nuget package
-      run: dotnet pack --configuration Debug --output "_build" --no-build
+      run: dotnet pack --configuration Release --output "_build" --no-build
 
     - name: upload nuget package
       uses: actions/upload-release-asset@v1
