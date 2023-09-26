@@ -52,6 +52,7 @@ jobs:
 
     - name: Build Solution
       run: msbuild.exe $env:Solution_Name /verbosity:minimal /p:GeneratePackageOnBuild=false
+      
 
     - name: Execute unit tests
       run: dotnet test
