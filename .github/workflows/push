@@ -1,0 +1,89 @@
+name: Push to main
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [Release]
+
+    runs-on: windows-2019
+
+    env:
+      Solution_Name: test.sln
+      Project_Design_Path: test\test.csproj
+
+    steps:
+    - name: Get current year
+      run: echo "year=$(date +'%Y')" >> $GITHUB_ENV
+
+    - name: Application Version
+      id: version
+      uses: paulhatch/semantic-version@v5.2.1
+
+    - name: print version
+      run: echo ${{steps.version.outputs.version}}
+
+    - name: print version tag
+      run: echo ${{steps.version.outputs.version_tag}}
+
+    - name: create release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ steps.version.outputs.version }}
+        tag_name: ${{ github.ref }}
+        body: ${{ github.event.head_commit.message }}
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Navigate to Workspace
+      run: cd $GITHUB_WORKSPACE
+
+    - name: Create Build Directory
+      run: mkdir _build
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build Solution
+      run: msbuild.exe $env:Solution_Name /verbosity:minimal /p:GeneratePackageOnBuild=false /p:Configuration=Release
+	  env:
+	    version: ${{ steps.version.outputs.version }}
+
+    - name: Create the nuget package
+      run: dotnet pack --configuration Debug --output "_build" --no-build
+
+#    - name: Upload nuget package
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: nuget Package
+#        path: "./_build"
+
+    - name: upload nuget package
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./_build/uipathteam.extensions.activities.zip
+        asset_name: uipathteam.extensions.activities.zip
+        asset_content_type: application/zip
