@@ -44,15 +44,11 @@ jobs:
     - name: Navigate to Workspace
       run: cd $GITHUB_WORKSPACE
 
-    - name: Create Build Directory
-      run: mkdir _build
-
     - name: Restore dependencies
       run: dotnet restore
 
     - name: Build Solution
       run: msbuild.exe $env:Solution_Name /verbosity:minimal /p:GeneratePackageOnBuild=false
       
-
     - name: Execute unit tests
       run: dotnet test
