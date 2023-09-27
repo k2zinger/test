@@ -28,6 +28,8 @@ jobs:
     - name: Application Version
       id: version
       uses: paulhatch/semantic-version@v5.2.1
+      with:
+        major_pattern: "MAJOR"
 
     - name: print version tag
       run: echo ${{steps.version.outputs.version_tag}}
