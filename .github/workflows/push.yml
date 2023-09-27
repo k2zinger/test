@@ -20,6 +20,11 @@ jobs:
     - name: Get current year
       run: echo "year=$(date +'%Y')" >> $GITHUB_ENV
 
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
     - name: Application Version
       id: version
       uses: paulhatch/semantic-version@v5.2.1
@@ -38,11 +43,6 @@ jobs:
         body: ${{ github.event.head_commit.message }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
 
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
