@@ -78,3 +78,4 @@ jobs:
         asset_path: ./_build/test.${{steps.version.outputs.version}}.nupkg
         asset_name: test.${{steps.version.outputs.version}}.nupkg
         asset_content_type: application/zip
+
